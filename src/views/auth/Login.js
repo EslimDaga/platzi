@@ -48,7 +48,6 @@ const Login = () => {
                         style={{ transition: "all .15s ease" }}
                       />
                     </div>
-
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-gray-900 dark:text-white font-urbanist text-base font-bold mb-2"
@@ -109,6 +108,6 @@ const Login = () => {
       </section>
     </main>
   );
-  }
+}
 
 export default Login;
