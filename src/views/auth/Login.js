@@ -1,6 +1,16 @@
 import Toggle from "../../components/DarkMode/ThemeToggle";
+import { FaEye, FaEyeSlash } from "react-icons/fa"
+import { useState } from "react";
 
 const Login = () => {
+
+  //Hook Show Password
+  const [passwordShow, setPasswordShow] = useState(false);
+
+  const togglePasswordShow = () => {
+    setPasswordShow(passwordShow ? false : true);
+  }
+
   return (
     <main>
       <section className="absolute w-full h-full bg-[#EEEEEE] dark:bg-[#181b32]">
@@ -47,11 +57,21 @@ const Login = () => {
                         Contraseña
                       </label>
                       <input
-                        type="password"
+                        type={passwordShow ? "text" : "password"}
                         className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded font-urbanist text-base font-medium shadow focus:outline-none focus:ring-none w-full"
                         placeholder="Ingrese su contraseña"
                         style={{ transition: "all .15s ease" }}
                       />
+                      <div
+                        onClick={togglePasswordShow}
+                        className="cursor-pointer"
+                      >
+                        {passwordShow ? (
+                          <FaEye className="h-5 w-5 text-dark-500 dark:text-gray-100 float-right relative bottom-[2.1rem] right-4" />
+                        ) : (
+                          <FaEyeSlash className="h-5 w-5 text-dark-500 dark:text-gray-100 float-right relative bottom-[2.1rem] right-4" />
+                        )}
+                      </div>
                     </div>
                     <div className="text-center mt-6">
                       <button
