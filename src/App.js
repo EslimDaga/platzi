@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import AuthLogin from "./views/auth/index";
+import AuthLogin from "./views/auth/Login";
 
 const App = () => {
   return (
