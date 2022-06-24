@@ -1,12 +1,17 @@
-import Toggle from "../../components/DarkMode/ThemeToggle";
+import Toggle from "../../components/darkmode/ThemeToggle";
 import { Formik } from "formik";
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { useState } from "react";
+import { loginUser, useAuthDispatch, useAuthState, } from "../../contexts/auth/index";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
 
   //Hook Show Password
   const [passwordShow, setPasswordShow] = useState(false);
+
+  const dispatch = useAuthDispatch();
+  const { loading, errorMessage } = useAuthState();
 
   const togglePasswordShow = () => {
     setPasswordShow(passwordShow ? false : true);
@@ -57,15 +62,24 @@ const Login = () => {
                           "Tu contraseña debe de tener al menos 6 caracteres";
                       }
 
-                      /* Button Validation */
-
                       return errors;
                     }}
-                    onSubmit={(values, { setSubmitting }) => {
-                      setTimeout(() => {
-                        console.log(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                      }, 400);
+                    onSubmit={async (values) => {
+                      const { email, password } = values;
+                      try {
+                        let response = await loginUser(dispatch, {
+                          email,
+                          password,
+                        });
+                        console.log(loading);
+                        if (!response) {
+                          toast.error(errorMessage);
+                        } else {
+                          toast.success("Bienvenido a Platzi Shop");
+                        }
+                      } catch (error) {
+                        console.log(error);
+                      }
                     }}
                   >
                     {({
@@ -75,7 +89,6 @@ const Login = () => {
                       handleChange,
                       handleBlur,
                       handleSubmit,
-                      isSubmitting,
                     }) => (
                       <form onSubmit={handleSubmit} autoComplete="off">
                         <div className="relative w-full mb-3">
@@ -93,7 +106,7 @@ const Login = () => {
                             value={values.email}
                             className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-none focus:ring-none w-full"
                             placeholder="Ingrese su correo electronico"
-                            style={{ transition: "all .15s ease" }}
+                            disabled={loading}
                           />
                           {errors.email && touched.email && (
                             <label
@@ -119,7 +132,7 @@ const Login = () => {
                             value={values.password}
                             className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-none focus:ring-none w-full"
                             placeholder="Ingrese su contraseña"
-                            style={{ transition: "all .15s ease" }}
+                            disabled={loading}
                           />
                           <div
                             onClick={togglePasswordShow}
@@ -143,24 +156,51 @@ const Login = () => {
                         <div className="text-center mt-6">
                           <button
                             className={
-                              `bg-[#6f4ef6] text-white text-base font-urbanist font-bold px-6 py-3 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ` +
-                              (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                                values.email
-                              ) && values.password.length >= 6
-                                ? "active:bg-[#3417aa]"
-                                : "cursor-not-allowed opacity-50")
+                              !loading
+                                ? `bg-[#6f4ef6] text-white text-base font-urbanist font-bold px-6 py-3 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ` +
+                                  (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                                    values.email
+                                  ) && values.password.length >= 6
+                                    ? "active:bg-[#3417aa]"
+                                    : "cursor-not-allowed opacity-50")
+                                : "bg-[#6f4ef6] text-white text-base font-urbanist font-bold px-6 py-3 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full cursor-not-allowed opacity-50"
                             }
                             type="submit"
                             disabled={
+                              !loading &&
                               /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
                                 values.email
-                              ) && values.password.length >= 6
+                              ) &&
+                              values.password.length >= 6
                                 ? false
                                 : true
                             }
-                            style={{ transition: "all .15s ease" }}
                           >
-                            Iniciar sesión
+                            <div className="inline-flex items-center">
+                              {loading && (
+                                <svg
+                                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                  ></circle>
+                                  <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                  ></path>
+                                </svg>
+                              )}
+                              Iniciar sesión
+                            </div>
                           </button>
                         </div>
                       </form>
@@ -189,6 +229,33 @@ const Login = () => {
             </div>
           </div>
         </div>
+        <Toaster
+          toastOptions={{
+            className: "font-urbanist font-bold",
+            error: {
+              icon: "😕",
+              iconTheme: {
+                primary: "white",
+                secondary: "#E6215D",
+              },
+              style: {
+                background: "#E6215D",
+                color: "#FFFFFF",
+              },
+            },
+            success: {
+              icon: "✅",
+              iconTheme: {
+                primary: "white",
+                secondary: "#00ab55",
+              },
+              style: {
+                background: "#00ab55",
+                color: "#FFFFFF",
+              },
+            },
+          }}
+        />
       </section>
     </main>
   );
