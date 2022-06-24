@@ -15,7 +15,7 @@ export async function loginUser(dispatch, loginPayload) {
     if (data.access_token) {
       dispatch({ type: "LOGIN_SUCCESS", payload: data.access_token });
       const { access_token } = data;
-      localStorage.setItem("currentUser", JSON.stringify(access_token));
+      localStorage.setItem("currentToken", JSON.stringify(access_token));
       return data;
     }
 
@@ -28,6 +28,6 @@ export async function loginUser(dispatch, loginPayload) {
 
 export async function logout(dispatch) {
   dispatch({ type: "LOGOUT" });
-  localStorage.removeItem("currentUser");
+  localStorage.removeItem("currentToken");
   localStorage.removeItem("token");
 }
