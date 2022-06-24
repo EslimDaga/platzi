@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import { ThemeContext } from "../../contexts/darkmode/ThemeContext";
 
 const Toggle = () => {
   const { theme, setTheme } = useContext(ThemeContext);
