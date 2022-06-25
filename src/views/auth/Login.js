@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { useState } from "react";
 import { loginUser, useAuthDispatch, useAuthState, } from "../../contexts/auth/index";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -11,6 +12,7 @@ const Login = () => {
   const [passwordShow, setPasswordShow] = useState(false);
 
   const dispatch = useAuthDispatch();
+  const navigate = useNavigate();
   const { loading, errorMessage } = useAuthState();
 
   const togglePasswordShow = () => {
@@ -71,11 +73,13 @@ const Login = () => {
                           email,
                           password,
                         });
-                        console.log(loading);
                         if (!response) {
                           toast.error(errorMessage);
                         } else {
                           toast.success("Bienvenido a Platzi Shop");
+                          setTimeout(() => {
+                            navigate("/dashboard");
+                          }, 2000);
                         }
                       } catch (error) {
                         console.log(error);
@@ -244,7 +248,7 @@ const Login = () => {
               },
             },
             success: {
-              icon: "✅",
+              icon: "😎",
               iconTheme: {
                 primary: "white",
                 secondary: "#00ab55",
