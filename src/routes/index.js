@@ -4,10 +4,12 @@ import Dashboard from "../views/dashboard/index";
 const routes = [
   {
     path: "/login",
-    component: <Login />
+    component: <Login />,
+    isPrivate: false
   },{
     path: "/dashboard",
-    component: <Dashboard />
+    component: <Dashboard />,
+    isPrivate: true
   }
 ];
 
