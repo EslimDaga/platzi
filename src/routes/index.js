@@ -1,9 +1,13 @@
 import Login from "../views/auth/Login";
+import Dashboard from "../views/dashboard/index";
 
 const routes = [
   {
     path: "/login",
-    component: <Login/>
+    component: <Login />
+  },{
+    path: "/dashboard",
+    component: <Dashboard />
   }
 ];
 
