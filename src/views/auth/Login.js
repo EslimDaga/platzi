@@ -4,7 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { useState } from "react";
 import { loginUser, useAuthDispatch, useAuthState, } from "../../contexts/auth/index";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -233,12 +233,12 @@ const Login = () => {
                   </a>
                 </div>
                 <div className="w-1/2 text-right">
-                  <a
+                  <Link
                     className="text-gray-800 dark:text-[#34d69b] font-urbanist font-medium text-sm"
-                    href="/"
+                    to="/register"
                   >
                     Crea una cuenta nueva
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
