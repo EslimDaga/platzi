@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { logout, useAuthDispatch, useAuthState } from "../../contexts/auth/index";
+import { logout, useAuthDispatch } from "../../contexts/auth/index";
 
 const Dashboard = () => {
 
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
-  const {token} = useAuthState();
 
   const handleLogout = () => {
     logout(dispatch);
