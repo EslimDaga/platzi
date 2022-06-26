@@ -19,6 +19,49 @@ const Login = () => {
     setPasswordShow(passwordShow ? false : true);
   }
 
+  const validateLogin = (values) => {
+    const errors = {};
+    /* Email validation */
+    if (!values.email) {
+      errors.email = "Campo requerido";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+        values.email
+      )
+    ) {
+      errors.email = "Por favor, ingresa un email válido.";
+    }
+
+    /* Password validation */
+    if (!values.password) {
+      errors.password = "Campo requerido";
+    } else if (values.password.length <= 6) {
+      errors.password =
+        "Tu contraseña debe de tener al menos 6 caracteres";
+    }
+    return errors;
+  }
+
+  const handleSubmit = async(values) => {
+    const { email, password } = values;
+    try {
+      let response = await loginUser(dispatch, {
+        email,
+        password,
+      });
+      if (!response) {
+        toast.error(errorMessage);
+      } else {
+        toast.success("Bienvenido a Platzi Shop");
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 2000);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <main>
       <section className="absolute w-full h-full bg-[#EEEEEE] dark:bg-[#181b32]">
@@ -43,48 +86,8 @@ const Login = () => {
                 <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                   <Formik
                     initialValues={{ email: "", password: "" }}
-                    validate={(values) => {
-                      const errors = {};
-                      /* Email validation */
-                      if (!values.email) {
-                        errors.email = "Campo requerido";
-                      } else if (
-                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                          values.email
-                        )
-                      ) {
-                        errors.email = "Por favor, ingresa un email válido.";
-                      }
-
-                      /* Password validation */
-                      if (!values.password) {
-                        errors.password = "Campo requerido";
-                      } else if (values.password.length <= 6) {
-                        errors.password =
-                          "Tu contraseña debe de tener al menos 6 caracteres";
-                      }
-
-                      return errors;
-                    }}
-                    onSubmit={async (values) => {
-                      const { email, password } = values;
-                      try {
-                        let response = await loginUser(dispatch, {
-                          email,
-                          password,
-                        });
-                        if (!response) {
-                          toast.error(errorMessage);
-                        } else {
-                          toast.success("Bienvenido a Platzi Shop");
-                          setTimeout(() => {
-                            navigate("/dashboard");
-                          }, 2000);
-                        }
-                      } catch (error) {
-                        console.log(error);
-                      }
-                    }}
+                    validate={validateLogin}
+                    onSubmit={handleSubmit}
                   >
                     {({
                       values,
