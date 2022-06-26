@@ -1,6 +1,7 @@
 import { Formik } from "formik";
 import { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Toggle from "../../components/darkmode/ThemeToggle";
 
 const Register = () => {
@@ -175,20 +176,12 @@ const Register = () => {
               </div>
               <div className="flex flex-wrap mt-6">
                 <div className="w-1/2">
-                  <a
-                    className="text-gray-800 dark:text-[#34d69b] font-urbanist font-medium text-sm"
-                    href="/"
+                  <Link
+                    className="text-gray-800 dark:text-[#34d69b] font-urbanist font-medium text-sm flex items-center"
+                    to="/login"
                   >
-                    ¿Olvido su contraseña?
-                  </a>
-                </div>
-                <div className="w-1/2 text-right">
-                  <a
-                    className="text-gray-800 dark:text-[#34d69b] font-urbanist font-medium text-sm"
-                    href="/"
-                  >
-                    Crea una cuenta nueva
-                  </a>
+                    <FaArrowLeft className="mr-2"/> Volver al inicio de sesión
+                  </Link>
                 </div>
               </div>
             </div>
