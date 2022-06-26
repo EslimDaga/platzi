@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom";
 import Login from "../views/auth/Login";
+import Register from "../views/auth/Register";
 import Dashboard from "../views/dashboard/index";
 
 const routes = [
@@ -12,7 +13,13 @@ const routes = [
     path: "/login",
     component: <Login />,
     isPrivate: false
-  },{
+  },
+  {
+    path: "/register",
+    component: <Register />,
+    isPrivate: false
+  },
+  {
     path: "/dashboard",
     component: <Dashboard />,
     isPrivate: true
