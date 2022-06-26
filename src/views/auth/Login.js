@@ -82,6 +82,14 @@ const Login = () => {
                       />
                     </figure>
                   </div>
+                  <div className="text-center">
+                    <h1 className="text-black dark:text-white font-urbanist font-extrabold text-xl">
+                      Bienvenido de Vuelta
+                    </h1>
+                    <h2 className="text-[#B5B5C3] font-urbanist font-bold text-lg">
+                      Que bueno verte otra vez 😀
+                    </h2>
+                  </div>
                 </div>
                 <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                   <Formik
