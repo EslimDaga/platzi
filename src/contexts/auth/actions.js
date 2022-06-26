@@ -1,4 +1,4 @@
-const ROOT_URL = "https://api.escuelajs.co/api/v1/auth/login";
+const ROOT_URL = "https://api.escuelajs.co/api/v1";
 
 export async function loginUser(dispatch, loginPayload) {
   const requestOptions = {
@@ -9,7 +9,10 @@ export async function loginUser(dispatch, loginPayload) {
 
   try {
     dispatch({ type: "REQUEST_LOGIN" });
-    let response = await fetch(`${ROOT_URL}`, requestOptions);
+    let response = await fetch(
+      `${ROOT_URL}/auth/login`,
+      requestOptions
+    );
     let data = await response.json();
 
     if (data.access_token) {
