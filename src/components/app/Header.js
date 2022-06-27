@@ -2,25 +2,27 @@ import Toggle from "./../../components/darkmode/ThemeToggleGeneral";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { logout, useAuthDispatch } from "../../contexts/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaBars,
-  FaChevronCircleLeft,
+  FaBoxes,
+  FaBoxOpen,
   FaDoorClosed,
+  FaHome,
   FaIdCard,
-  FaMap,
   FaMoon,
   FaSignOutAlt,
   FaTimes,
   FaUserCircle,
+  FaUsers,
 } from "react-icons/fa";
 
 const navigation = {
   pages: [
-    { name: "Dashboard", href: "#", icon: FaChevronCircleLeft },
-    { name: "Productos", href: "#", icon: FaMap },
-    { name: "Categorías", href: "#", icon: FaMap },
-    { name: "Usuarios", href: "#", icon: FaMap },
+    { name: "Dashboard", href: "/dashboard", icon: FaHome },
+    { name: "Productos", href: "/products", icon: FaBoxes },
+    { name: "Categorías", href: "/categories", icon: FaBoxOpen },
+    { name: "Usuarios", href: "/users", icon: FaUsers },
   ],
 };
 
@@ -35,7 +37,7 @@ const Header = () => {
   return (
     <Popover className="relative bg-white dark:bg-gray-900 shadow-xl">
       <div className="w-full mx-auto px-6 sm:px-6">
-        <div className="flex justify-between items-center py-5 md:space-x-10">
+        <div className="flex justify-between items-center py-4 md:space-x-10">
           <div className="flex justify-start">
             <a href="/">
               <span className="sr-only">Logo Platzi</span>
@@ -59,13 +61,13 @@ const Header = () => {
             <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
               <div className="h-full flex space-x-8">
                 {navigation.pages.map((page) => (
-                  <a
+                  <Link
                     key={page.name}
-                    href={page.href}
+                    to={page.href}
                     className="flex items-center font-urbanist font-bold text-base text-gray-500 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white"
                   >
                     {page.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </Popover.Group>
@@ -147,16 +149,16 @@ const Header = () => {
               <div className="mt-6">
                 <nav className="grid gap-y-2">
                   {navigation.pages.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href="/"
-                      className="flex w-full py-4 font-Poppins font-medium text-left text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 bg-white dark:bg-gray-800 rounded-lg "
+                      to={item.href}
+                      className="flex w-full py-4 font-urbanist font-bold text-base text-left text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 bg-white dark:bg-gray-800 rounded-lg "
                     >
                       <item.icon className="w-5 h-5 mr-2" />
                       <span>{item.name}</span>
-                    </a>
+                    </Link>
                   ))}
-                  <div className="py-4 flex text-gray-500 dark:text-gray-300 font-Poppins font-medium items-center justify-between">
+                  <div className="py-4 flex text-gray-500 dark:text-gray-300 font-urbanist font-bold text-base items-center justify-between">
                     <div className="flex">
                       <FaMoon className="w-6 h-6 mr-2 text-gray-500 dark:text-gray-300" />
                       Modo Nocturno
@@ -170,18 +172,18 @@ const Header = () => {
               <div className="flex">
                 <a
                   href="/"
-                  className="w-full flex items-center justify-center px-4 mx-2 py-2 border border-transparent rounded-md shadow-sm font-Poppins font-medium text-white bg-blue-600 hover:bg-blue-500"
+                  className="w-full flex items-center justify-center px-4 mx-2 py-2 border border-transparent rounded-md shadow-sm font-urbanist font-bold text-base text-white bg-blue-600 hover:bg-blue-500"
                 >
                   <FaUserCircle className="w-4 h-4 mr-1" />
                   Mi perfil
                 </a>
-                <a
-                  href="/"
-                  className="w-full flex items-center justify-center px-4 mx-2 py-2 border border-transparent rounded-md shadow-sm font-Poppins font-medium text-white bg-blue-600 hover:bg-blue-500"
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center justify-center px-4 mx-2 py-2 border border-transparent rounded-md shadow-sm font-urbanist font-bold text-base text-white bg-blue-600 hover:bg-blue-500"
                 >
                   <FaDoorClosed className="w-4 h-4 mr-1" />
                   Cerrar Sesión
-                </a>
+                </button>
               </div>
             </div>
           </div>
