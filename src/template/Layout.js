@@ -3,16 +3,15 @@ import Header from "../components/app/Header";
 
 const Layout = (props) => {
   let location = useLocation();
-  console.log(location);
   return (
     <>
       {location.pathname === "/login" || location.pathname === "/register" ? (
         props.children
       ) : (
-        <>
+        <main className="bg-gray-100 dark:bg-gray-900 h-screen flex flex-col">
           <Header />
           {props.children}
-        </>
+        </main>
       )}
     </>
   );
