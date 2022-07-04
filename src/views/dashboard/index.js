@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Pagination } from "swiper";
 import {
 	FaAngleRight,
 	FaBoxes,
@@ -8,13 +12,66 @@ import {
 	FaMoneyCheckAlt,
 	FaUsers,
 } from "react-icons/fa";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
+import { useContext } from "react";
+import { ThemeContext } from "../../contexts/darkmode/ThemeContext";
 
 const Dashboard = () => {
+	const { theme } = useContext(ThemeContext);
+
+	const options = {
+		colors: [theme === "light" ? "#181B32" : "#FFFFFF"],
+		chart: {
+			backgroundColor: {
+				linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+				stops: [
+					[0, theme === "light" ? "#FFFFFF" : "#181B32"],
+					[1, theme === "light" ? "#FFFFFF" : "#181B32"],
+				],
+			},
+			style: {
+				fontFamily: "'Urbanist', sans-serif",
+				fontWeight: "700",
+			},
+			type: "spline",
+		},
+		title: {
+			style: {
+				color: theme === "light" ? "#181B32" : "#FFFFFF",
+				textTransform: "capitalize",
+				fontSize: "16px",
+			},
+			text: "Gráfico de ventas",
+		},
+		series: [
+			{
+				data: [1, 2, 1, 4, 3, 6],
+			},
+		],
+		yAxis: [
+			{
+				//--- Primary yAxis
+				title: {
+					style: {
+						color: theme === "light" ? "#181B32" : "#FFFFFF",
+					},
+					text: "Cantidad",
+				},
+			},
+			{
+				//--- Secondary yAxis
+				title: {
+					style: {
+						color: theme === "light" ? "#181B32" : "#FFFFFF",
+					},
+					text: "Cantidad",
+				},
+				opposite: true,
+			},
+		],
+	};
 	return (
 		<div className="flex-1 overflow-y-auto w-full">
 			<div className="relative pt-8">
@@ -190,6 +247,11 @@ const Dashboard = () => {
 								</div>
 							</SwiperSlide>
 						</Swiper>
+						<div className="w-full px-4">
+							<div className="relative flex flex-col min-w-0 break-words bg-white dark:bg-[#181B32] rounded-xl mb-6 xl:mb-0 shadow-lg px-1 pt-2">
+								<HighchartsReact highcharts={Highcharts} options={options} />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
