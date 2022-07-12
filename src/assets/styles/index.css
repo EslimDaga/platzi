@@ -1,5 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ag-theme-alpine .ag-root-wrapper {
+	border-radius: 0.75rem;
+}
+
+.ag-theme-alpine-dark .ag-root-wrapper {
+	border-radius: 0.75rem;
+}
+
+.ag-theme-alpine-dark .ag-overlay-loading-wrapper {
+	background-color: #181b3257;
+}
+
+.ag-theme-alpine-dark {
+	--ag-background-color: #181b32;
+	--ag-foreground-color: #fff;
+	--ag-border-color: rgba(255, 255, 255, 0.158);
+	--ag-secondary-border-color: rgba(88, 86, 82, 0.5);
+	--ag-header-background-color: #181b32;
+	--ag-odd-row-background-color: #181b32;
+	--ag-control-panel-background-color: #181b32;
+	--ag-subheader-background-color: #000;
+	--ag-input-disabled-background-color: #282c2f;
+	--ag-input-focus-box-shadow: 0 0 2px 0.5px rgba(255, 255, 255, 0.5),
+		0 0 4px 3px var(--ag-input-focus-border-color);
+	--ag-card-shadow: 0 1px 20px 1px black;
+	--ag-disabled-foreground-color: rgba(255, 255, 255, 0.5);
+	--ag-chip-background-color: rgba(255, 255, 255, 0.07);
+	--ag-input-disabled-border-color: rgba(104, 104, 110, 0.3);
+	--ag-input-disabled-background-color: rgba(104, 104, 110, 0.07);
+}
