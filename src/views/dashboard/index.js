@@ -48,6 +48,9 @@ const Dashboard = () => {
 				data: [1, 2, 1, 4, 3, 6],
 			},
 		],
+		accessibility: {
+			enabled: false,
+		},
 		yAxis: [
 			{
 				//--- Primary yAxis
@@ -73,7 +76,7 @@ const Dashboard = () => {
 	return (
 		<div className="flex-1 overflow-y-auto w-full">
 			<Breadcumb link="dashboard" title="Dashboard" />
-			<div className="relative bg-lightBlue-600 pt-8">
+			<div className="relative bg-lightBlue-600 py-8">
 				<div className="mx-auto w-full">
 					<div>
 						<Swiper
