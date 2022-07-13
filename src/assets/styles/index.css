@@ -6,20 +6,46 @@
 
 .ag-theme-alpine .ag-root-wrapper {
 	border-radius: 0.75rem;
+	--tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+		0 4px 6px -4px rgb(0 0 0 / 0.1);
+	--tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
+		0 4px 6px -4px var(--tw-shadow-color);
+	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+		var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.ag-theme-alpine .ag-header-row {
+	border-bottom: rgba(88, 86, 82, 0.5) solid 1px;
 }
 
 .ag-theme-alpine-dark .ag-root-wrapper {
 	border-radius: 0.75rem;
 }
 
+.ag-theme-alpine-dark .ag-header-row {
+	border-bottom: rgba(88, 86, 82, 0.5) solid 1px;
+}
+
+.ag-theme-alpine-dark .ag-picker-field-wrapper {
+	border: none;
+}
+
 .ag-theme-alpine-dark .ag-overlay-loading-wrapper {
 	background-color: #181b3257;
 }
 
+.ag-theme-alpine {
+	--ag-background-color: #f1f1f1;
+	--ag-foreground-color: #374151;
+	--ag-border-color: none;
+	--ag-secondary-border-color: rgba(88, 86, 82, 0.5);
+	--ag-header-background-color: #fff;
+	--ag-odd-row-background-color: #fff;
+}
+
 .ag-theme-alpine-dark {
-	--ag-background-color: #181b32;
+	--ag-background-color: #374151;
 	--ag-foreground-color: #fff;
-	--ag-border-color: rgba(255, 255, 255, 0.158);
+	--ag-border-color: none;
 	--ag-secondary-border-color: rgba(88, 86, 82, 0.5);
 	--ag-header-background-color: #181b32;
 	--ag-odd-row-background-color: #181b32;
