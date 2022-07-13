@@ -77,7 +77,7 @@ const Products = () => {
 	return (
 		<div className="flex-1 overflow-y-auto w-full">
 			<Breadcumb link="products" title="Productos" />
-			<div className="w-full h-full py-8 px-4">
+			<div className="w-full h-[70%] py-8 px-4">
 				<div
 					className={
 						theme === "light"
