@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Breadcumb = ({ link, title }) => {
 	return (
-		<div className="relative pt-8">
+		<div className="relative">
 			<nav className="flex px-4" aria-label="Breadcrumb">
 				<ol className="inline-flex items-center space-x-1 md:space-x-3">
 					<li className="inline-flex items-center">
