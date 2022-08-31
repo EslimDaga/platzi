@@ -2,7 +2,7 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import Breadcumb from "../../components/app/Breadcumb";
 import { AgGridReact } from "ag-grid-react";
 import { ThemeContext } from "../../contexts/darkmode/ThemeContext";
-
+import { FaPlusCircle } from "react-icons/fa";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { getProducts } from "../../services/products";
@@ -48,7 +48,13 @@ const Products = () => {
 
 	return (
 		<div className="flex-1 overflow-y-auto w-full">
-			<Breadcumb link="products" title="Productos" />
+			<div className="flex items-center justify-between pt-8">
+				<Breadcumb link="products" title="Productos" />
+				<button className="flex font-urbanist font-bold text-base text-white bg-[#98ca3f] items-center rounded-md mx-4 p-2">
+					Agregar Producto
+					<FaPlusCircle className="ml-2" />
+				</button>
+			</div>
 			<div className="w-full h-[70%] py-8 px-4">
 				<div
 					className={
