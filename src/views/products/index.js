@@ -5,60 +5,37 @@ import { ThemeContext } from "../../contexts/darkmode/ThemeContext";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-
-var filterParams = {
-	comparator: (filterLocalDateAtMidnight, cellValue) => {
-		var dateAsString = cellValue;
-		if (dateAsString == null) return -1;
-		var dateParts = dateAsString.split("/");
-		var cellDate = new Date(
-			Number(dateParts[2]),
-			Number(dateParts[1]) - 1,
-			Number(dateParts[0])
-		);
-		if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-			return 0;
-		}
-		if (cellDate < filterLocalDateAtMidnight) {
-			return -1;
-		}
-		if (cellDate > filterLocalDateAtMidnight) {
-			return 1;
-		}
-	},
-	browserDatePicker: true,
-};
+import { getProducts } from "../../services/products";
+import { AG_GRID_LOCALE_ES } from "../../i18n/locale.es";
 
 const Products = () => {
 	const { theme } = useContext(ThemeContext);
-	console.log(theme);
 
 	const [rowData, setRowData] = useState();
 
 	const columnDefs = [
-		{ field: "athlete" },
-		{ field: "age", filter: "agNumberColumnFilter" },
-		{ field: "country" },
-		{ field: "year" },
+		{ field: "title", headerName: "Nombre", filter: "agTextColumnFilter" },
+		{ field: "price", headerName: "Precio", filter: "agNumberColumnFilter" },
 		{
-			field: "date",
-			minWidth: 190,
-			filter: "agDateColumnFilter",
-			filterParams: filterParams,
+			field: "description",
+			headerName: "Descripción",
+			filter: "agTextColumnFilter",
 		},
-		{ field: "sport" },
-		{ field: "gold", filter: "agNumberColumnFilter" },
-		{ field: "silver", filter: "agNumberColumnFilter" },
-		{ field: "bronze", filter: "agNumberColumnFilter" },
-		{ field: "total", filter: "agNumberColumnFilter" },
+		{
+			field: "category.name",
+			headerName: "Categoría",
+			filter: "agTextColumnFilter",
+		},
 	];
+
+	const localeText = useMemo(() => {
+		return AG_GRID_LOCALE_ES;
+	}, []);
 
 	const defaultColDef = useMemo(() => {
 		return {
-			editable: true,
 			sortable: true,
 			flex: 1,
-			minWidth: 100,
 			filter: true,
 			floatingFilter: true,
 			resizable: true,
@@ -66,12 +43,7 @@ const Products = () => {
 	}, []);
 
 	useEffect(() => {
-		fetch("https://www.ag-grid.com/example-assets/olympic-winners.json")
-			.then(resp => resp.json())
-			.then(data => {
-				console.log(data);
-				setRowData(data);
-			});
+		getProducts().then(data => setRowData(data));
 	}, []);
 
 	return (
@@ -89,6 +61,7 @@ const Products = () => {
 						rowData={rowData}
 						columnDefs={columnDefs}
 						defaultColDef={defaultColDef}
+						localeText={localeText}
 					></AgGridReact>
 				</div>
 			</div>
