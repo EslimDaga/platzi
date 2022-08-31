@@ -14,17 +14,29 @@ const Products = () => {
 	const [rowData, setRowData] = useState();
 
 	const columnDefs = [
-		{ field: "title", headerName: "Nombre", filter: "agTextColumnFilter" },
-		{ field: "price", headerName: "Precio", filter: "agNumberColumnFilter" },
+		{
+			field: "title",
+			headerName: "Nombre",
+			filter: "agTextColumnFilter",
+			cellClass: "text-center",
+		},
+		{
+			field: "price",
+			headerName: "Precio",
+			filter: "agNumberColumnFilter",
+			cellClass: "text-center",
+		},
 		{
 			field: "description",
 			headerName: "Descripción",
 			filter: "agTextColumnFilter",
+			cellClass: "text-center",
 		},
 		{
 			field: "category.name",
 			headerName: "Categoría",
 			filter: "agTextColumnFilter",
+			cellClass: "text-center",
 		},
 	];
 
