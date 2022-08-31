@@ -40,6 +40,7 @@
 	--ag-secondary-border-color: rgba(88, 86, 82, 0.5);
 	--ag-header-background-color: #fff;
 	--ag-odd-row-background-color: #fff;
+	--ag-font-family: "Urbanist";
 }
 
 .ag-theme-alpine-dark {
@@ -59,4 +60,5 @@
 	--ag-chip-background-color: rgba(255, 255, 255, 0.07);
 	--ag-input-disabled-border-color: rgba(104, 104, 110, 0.3);
 	--ag-input-disabled-background-color: rgba(104, 104, 110, 0.07);
+	--ag-font-family: "Urbanist";
 }
