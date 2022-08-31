@@ -62,3 +62,7 @@
 	--ag-input-disabled-background-color: rgba(104, 104, 110, 0.07);
 	--ag-font-family: "Urbanist";
 }
+
+.ag-header-cell-label {
+	justify-content: center;
+}
