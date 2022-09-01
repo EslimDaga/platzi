@@ -90,7 +90,7 @@ const Products = () => {
 		<>
 			<div className="flex items-center justify-between pt-8">
 				<Breadcumb link="products" title="Productos" />
-				<button className="flex font-urbanist font-bold text-base text-white bg-[#98ca3f] items-center rounded-md mx-4 py-2 px-4">
+				<button className="flex font-urbanist font-bold text-base text-white bg-[#98ca3f] items-center rounded-md mx-4 py-2 px-4 hover:bg-[#81ac35]">
 					Agregar Producto
 					<FaPlusCircle className="ml-2" />
 				</button>
