@@ -7,6 +7,7 @@ import { getProducts } from "../../services/products";
 import { AG_GRID_LOCALE_ES } from "../../i18n/locale.es";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import "animate.css";
 
 const Products = () => {
 	const { theme } = useContext(ThemeContext);
@@ -91,18 +92,30 @@ const Products = () => {
 	};
 
 	const closeModalCreateProduct = () => {
-		setShowModalCreateProduct(false);
+		document
+			.getElementById("modal-create-product")
+			.classList.remove("animate__fadeInDown");
+		document
+			.getElementById("modal-create-product")
+			.classList.add("animate__fadeOutUp");
+
+		setTimeout(() => {
+			setShowModalCreateProduct(false);
+		}, 500);
 	};
 
 	return (
 		<>
 			{showModalCreateProduct && (
 				<>
-					<div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+					<div
+						id="modal-create-product"
+						className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none animate__animated animate__fadeInDown"
+					>
 						<div className="relative w-full my-6 mx-4 max-w-3xl">
 							<div className="border-0 rounded-lg shadow-lg relative flex flex-col bg-white dark:bg-gray-800 outline-none focus:outline-none">
 								<div className="flex items-start justify-between p-5 border-blueGray-200 rounded-t">
-									<h3 className="dark:text-gray-100 text-base font-urbanist font-semibold self-center">
+									<h3 className="dark:text-gray-100 text-base font-urbanist font-bold self-center">
 										Agregar Producto
 									</h3>
 									<button
