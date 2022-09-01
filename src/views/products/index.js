@@ -2,11 +2,11 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import Breadcumb from "../../components/app/Breadcumb";
 import { AgGridReact } from "ag-grid-react";
 import { ThemeContext } from "../../contexts/darkmode/ThemeContext";
-import { FaPlusCircle } from "react-icons/fa";
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-alpine.css";
+import { FaPen, FaPlusCircle, FaTrash } from "react-icons/fa";
 import { getProducts } from "../../services/products";
 import { AG_GRID_LOCALE_ES } from "../../i18n/locale.es";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
 
 const Products = () => {
 	const { theme } = useContext(ThemeContext);
@@ -19,24 +19,53 @@ const Products = () => {
 			headerName: "Nombre",
 			filter: "agTextColumnFilter",
 			cellClass: "text-center",
+			minWidth: 200,
 		},
 		{
 			field: "price",
 			headerName: "Precio",
 			filter: "agNumberColumnFilter",
 			cellClass: "text-center",
+			minWidth: 200,
+			cellRenderer: params => {
+				return `$ ${params.value}`;
+			},
 		},
 		{
 			field: "description",
 			headerName: "Descripción",
 			filter: "agTextColumnFilter",
 			cellClass: "text-center",
+			minWidth: 200,
 		},
 		{
 			field: "category.name",
 			headerName: "Categoría",
 			filter: "agTextColumnFilter",
 			cellClass: "text-center",
+			minWidth: 200,
+		},
+		{
+			headerName: "Acciones",
+			field: "id",
+			cellClass: "text-center",
+			minWidth: 200,
+			filtered: false,
+			resizable: false,
+			cellRenderer: params => {
+				return (
+					<div className="flex justify-center">
+						<button className="flex items-center text-white font-bold bg-blue-900 rounded-md px-3 mr-2">
+							<FaPen className="mr-2" />
+							Editar
+						</button>
+						<button className="flex items-center text-white font-bold bg-red-500 rounded-md px-3">
+							<FaTrash className="mr-2" />
+							Eliminar
+						</button>
+					</div>
+				);
+			},
 		},
 	];
 
