@@ -50,7 +50,6 @@ const Products = () => {
 			field: "id",
 			cellClass: "text-center",
 			minWidth: 200,
-			filtered: false,
 			resizable: false,
 			cellRenderer: params => {
 				return (
@@ -96,7 +95,7 @@ const Products = () => {
 					<FaPlusCircle className="ml-2" />
 				</button>
 			</div>
-			<div className="w-full h-[70%] py-8 px-4">
+			<div className="w-full h-[100%] py-8 px-4">
 				<div
 					className={
 						theme === "light"
