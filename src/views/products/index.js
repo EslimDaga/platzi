@@ -11,7 +11,6 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 const Products = () => {
 	const { theme } = useContext(ThemeContext);
 	const [showModalCreateProduct, setShowModalCreateProduct] = useState(false);
-
 	const [rowData, setRowData] = useState();
 
 	const columnDefs = [
@@ -156,7 +155,12 @@ const Products = () => {
 					<div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
 				</>
 			)}
-			<div className="flex items-center justify-between pt-8">
+			<div
+				className={
+					(showModalCreateProduct ? "blur-sm " : "") +
+					"flex items-center justify-between pt-8"
+				}
+			>
 				<Breadcumb link="products" title="Productos" />
 				<button
 					className="flex font-urbanist font-bold text-base text-white bg-[#98ca3f] items-center rounded-md mx-4 py-2 px-4 hover:bg-[#81ac35]"
@@ -166,7 +170,12 @@ const Products = () => {
 					<FaPlusCircle className="ml-2" />
 				</button>
 			</div>
-			<div className="flex-1 overflow-y-auto w-full">
+			<div
+				className={
+					(showModalCreateProduct ? "blur-sm " : "") +
+					"flex-1 overflow-y-auto w-full"
+				}
+			>
 				<div className="w-full h-[100%] py-8 px-4">
 					<div
 						className={
