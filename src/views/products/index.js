@@ -5,9 +5,16 @@ import { ThemeContext } from "../../contexts/darkmode/ThemeContext";
 import { FaPen, FaPlusCircle, FaTimes, FaTrash } from "react-icons/fa";
 import { getProducts } from "../../services/products";
 import { AG_GRID_LOCALE_ES } from "../../i18n/locale.es";
+import Select from "react-select";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import "animate.css";
+
+const options = [
+	{ value: "chocolate", label: "Chocolate" },
+	{ value: "strawberry", label: "Strawberry" },
+	{ value: "vanilla", label: "Vanilla" },
+];
 
 const Products = () => {
 	const { theme } = useContext(ThemeContext);
@@ -102,6 +109,61 @@ const Products = () => {
 		setTimeout(() => {
 			setShowModalCreateProduct(false);
 		}, 500);
+	};
+
+	const customStylesWhiteMode = {
+		control: (provided, state) => ({
+			...provided,
+			background: "#eeeeee",
+			borderRadius: "0.5rem",
+			borderColor: state.isFocused ? "#eeeeee" : "#eeeeee",
+			minHeight: state.isSelected ? "56px" : "56px",
+		}),
+		option: (provided, state) => ({
+			...provided,
+			background: state.isFocused ? "#2563eb" : "#eeeeee",
+			color: state.isFocused ? "#fff" : "#333333",
+			cursor: "pointer",
+			"&:hover": {
+				backgroundColor: "#2563eb",
+				color: "#fff",
+			},
+		}),
+		placeholder: base => ({
+			...base,
+		}),
+	};
+
+	const customStylesDarkMode = {
+		control: (provided, state) => ({
+			...provided,
+			background: "#3F425E",
+			borderRadius: "0.5rem",
+			borderColor: "#3F425E",
+			color: state.isSelected ? "#fff" : "#fff",
+			minHeight: state.isSelected ? "56px" : "56px",
+		}),
+		singleValue: (provided, state) => ({
+			...provided,
+			color: state.isSelected ? "#fff" : "#fff",
+		}),
+		placeholder: (provided, state) => ({
+			...provided,
+			color: state.isSelected ? "#fff" : "#fff",
+		}),
+		menuList: (provided, state) => ({
+			...provided,
+			background: "#3F425E",
+		}),
+		option: (provided, state) => ({
+			...provided,
+			background: state.isFocused ? "#5c608a" : "#3F425E",
+			color: state.isFocused ? "#fff" : "#fff",
+			"&:hover": {
+				backgroundColor: "#5c608a",
+				color: "#fff",
+			},
+		}),
 	};
 
 	return (
@@ -203,35 +265,46 @@ const Products = () => {
 																	className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full"
 																></textarea>
 															</div>
-															<div className="grid grid-cols-2 gap-3">
-																<div>
-																	<label
-																		htmlFor="description"
-																		className="block text-gray-700 dark:text-white font-urbanist text-base font-bold mb-2"
-																	>
-																		Categoría
-																	</label>
-																	<select
-																		name="category"
-																		id="category"
-																		className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full"
-																	>
-																		<option value="1">Categoría 1</option>
-																		<option value="2">Categoría 2</option>
-																	</select>
-																</div>
-																<div>
-																	<label
-																		htmlFor="name"
-																		className="block text-gray-700 dark:text-white font-urbanist text-base font-bold mb-2"
-																	>
-																		Precio
-																	</label>
-																	<input
-																		type="text"
-																		className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full"
-																	/>
-																</div>
+															<div>
+																<label
+																	htmlFor="description"
+																	className="block text-gray-700 dark:text-white font-urbanist text-base font-bold mb-2"
+																>
+																	Categoría
+																</label>
+																<Select
+																	options={options}
+																	placeholder="Selecciona una categoría"
+																	className="w-full rounded-lg z-1 focus:shadow focus:outline-none font-urbanist font-medium text-base"
+																	styles={
+																		theme === "light"
+																			? customStylesWhiteMode
+																			: customStylesDarkMode
+																	}
+																/>
+															</div>
+															<div>
+																<label
+																	htmlFor="name"
+																	className="block text-gray-700 dark:text-white font-urbanist text-base font-bold mb-2"
+																>
+																	Precio
+																</label>
+																<input
+																	type="text"
+																	className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full"
+																/>
+															</div>
+															<div>
+																<button
+																	className={`bg-[#98ca3f] text-gray-900 active:bg-gray-700 text-base font-urbanist font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 w-full`}
+																	type="submit"
+																	style={{ transition: "all .15s ease" }}
+																>
+																	<div className="inline-flex items-center">
+																		Guardar
+																	</div>
+																</button>
 															</div>
 														</div>
 													</form>
