@@ -108,7 +108,7 @@ const Products = () => {
 
 		setTimeout(() => {
 			setShowModalCreateProduct(false);
-		}, 500);
+		}, 250);
 	};
 
 	const customStylesWhiteMode = {
@@ -175,8 +175,8 @@ const Products = () => {
 						className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none animate__animated animate__fadeInDown"
 					>
 						<div className="relative w-full h-full py-6 px-4 max-w-3xl">
-							<div className="border-0 rounded-lg shadow-lg relative flex flex-col bg-white dark:bg-[#282b42] outline-none focus:outline-none">
-								<div className="flex items-start justify-between p-5 border-blueGray-200 rounded-t">
+							<div className="my-auto border-0 rounded-lg shadow-lg relative flex flex-col bg-white dark:bg-[#282b42] outline-none focus:outline-none">
+								<div className="flex items-start justify-between px-6 py-5 border-blueGray-200 rounded-t">
 									<h3 className="dark:text-gray-100 text-base font-urbanist font-bold self-center">
 										Agregar Producto
 									</h3>
@@ -184,7 +184,7 @@ const Products = () => {
 										className="p-1 ml-auto bg-transparent border-0 text-gray-900 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
 										onClick={closeModalCreateProduct}
 									>
-										<span className="bg-transparent text-gray-500 hover:text-gray-900 dark:text-gray-100 h-6 w-6 text-xl block outline-none focus:outline-none">
+										<span className="bg-transparent text-gray-500 hover:text-gray-900 dark:text-gray-300 hover:dark:text-gray-100 h-6 w-6 text-xl block outline-none focus:outline-none">
 											<FaTimes className="mt-1" />
 										</span>
 									</button>
