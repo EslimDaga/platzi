@@ -130,31 +130,109 @@ const Products = () => {
 								<div className="relative">
 									<div className="w-full bg-gray-100 dark:bg-gray-800">
 										<div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm">
-											<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1">
-												<div className="flex flex-col sm:mt-0 gap-7 text-sm px-4 py-4">
-													<form>
-														<div className="relative w-full mb-3">
-															<label
-																className={`block text-gray-700 dark:text-gray-100 text-base font-bold mb-2`}
-															>
-																Documento de Identidad
-															</label>
-															<input
-																type="text"
-																autoComplete="off"
-																name="dni"
-																className={`border-2 px-3 py-3 dark:border-gray-700 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded-md text-base shadow focus:outline-none focus:ring-blue-900 w-full font-bold`}
-																style={{ transition: "all .15s ease" }}
-															/>
+											<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-6">
+												<div className="flex justify-center">
+													<div className="w-full">
+														<div className="h-full flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+															<div className="space-y-1 text-center font-urbanist">
+																<svg
+																	className="mx-auto h-12 w-12 text-gray-400"
+																	stroke="currentColor"
+																	fill="none"
+																	viewBox="0 0 48 48"
+																	aria-hidden="true"
+																>
+																	<path
+																		d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+																		strokeWidth={2}
+																		strokeLinecap="round"
+																		strokeLinejoin="round"
+																	/>
+																</svg>
+																<div className="flex text-gray-600">
+																	<label
+																		htmlFor="file-upload"
+																		className="relative cursor-pointer rounded-md bg-white font-bold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-transparent hover:text-blue-500"
+																	>
+																		<span>Carga un archivo</span>
+																		<input
+																			id="file-upload"
+																			name="file-upload"
+																			type="file"
+																			className="sr-only"
+																		/>
+																	</label>
+																	<p className="pl-1">
+																		o arrastralo y sueltalo
+																	</p>
+																</div>
+																<p className="text-sm text-gray-500">
+																	PNG, JPG, GIF tamaño maximo 10MB
+																</p>
+															</div>
 														</div>
-														<div className="text-center mt-6">
-															<button
-																className={`bg-blue-900 dark:bg-blue-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full`}
-																type="submit"
-																style={{ transition: "all .15s ease" }}
-															>
-																Guardar
-															</button>
+													</div>
+												</div>
+												<div className="flex justify-center w-full">
+													<form action="" className="w-full">
+														<div className="space-y-6">
+															<div>
+																<label
+																	htmlFor="name"
+																	className="block text-gray-700 dark:text-white font-urbanist text-base font-bold mb-2"
+																>
+																	Nombre
+																</label>
+																<input
+																	type="text"
+																	className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full"
+																/>
+															</div>
+															<div>
+																<label
+																	htmlFor="description"
+																	className="block text-gray-700 dark:text-white font-urbanist text-base font-bold mb-2"
+																>
+																	Descripción
+																</label>
+																<textarea
+																	name=""
+																	id=""
+																	cols="30"
+																	rows="3"
+																	className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full"
+																></textarea>
+															</div>
+															<div className="grid grid-cols-2 gap-3">
+																<div>
+																	<label
+																		htmlFor="description"
+																		className="block text-gray-700 dark:text-white font-urbanist text-base font-bold mb-2"
+																	>
+																		Categoría
+																	</label>
+																	<select
+																		name="category"
+																		id="category"
+																		className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full"
+																	>
+																		<option value="1">Categoría 1</option>
+																		<option value="2">Categoría 2</option>
+																	</select>
+																</div>
+																<div>
+																	<label
+																		htmlFor="name"
+																		className="block text-gray-700 dark:text-white font-urbanist text-base font-bold mb-2"
+																	>
+																		Precio
+																	</label>
+																	<input
+																		type="text"
+																		className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full"
+																	/>
+																</div>
+															</div>
 														</div>
 													</form>
 												</div>
