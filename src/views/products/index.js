@@ -322,7 +322,7 @@ const Products = () => {
 			<div
 				className={
 					(showModalCreateProduct ? "blur-sm " : "") +
-					"flex items-center justify-between pt-8"
+					"flex items-center justify-between py-5"
 				}
 			>
 				<Breadcumb link="products" title="Productos" />
@@ -340,7 +340,7 @@ const Products = () => {
 					"flex-1 overflow-y-auto w-full"
 				}
 			>
-				<div className="w-full h-[100%] py-8 px-4">
+				<div className="w-full h-[100%] pb-5 px-4">
 					<div
 						className={
 							theme === "light"
