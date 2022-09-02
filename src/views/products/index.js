@@ -133,7 +133,7 @@ const Products = () => {
 											<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-6">
 												<div className="flex justify-center">
 													<div className="w-full">
-														<div className="h-full flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+														<div className="h-full bg-[#EEEEEE] dark:bg-[#3F425E] flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
 															<div className="space-y-1 text-center font-urbanist">
 																<svg
 																	className="mx-auto h-12 w-12 text-gray-400"
@@ -280,6 +280,7 @@ const Products = () => {
 							columnDefs={columnDefs}
 							defaultColDef={defaultColDef}
 							localeText={localeText}
+							pagination={true}
 						></AgGridReact>
 					</div>
 				</div>
