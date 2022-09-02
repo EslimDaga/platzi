@@ -113,7 +113,7 @@ const Products = () => {
 						className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none animate__animated animate__fadeInDown"
 					>
 						<div className="relative w-full my-6 mx-4 max-w-3xl">
-							<div className="border-0 rounded-lg shadow-lg relative flex flex-col bg-white dark:bg-gray-800 outline-none focus:outline-none">
+							<div className="border-0 rounded-lg shadow-lg relative flex flex-col bg-white dark:bg-[#282b42] outline-none focus:outline-none">
 								<div className="flex items-start justify-between p-5 border-blueGray-200 rounded-t">
 									<h3 className="dark:text-gray-100 text-base font-urbanist font-bold self-center">
 										Agregar Producto
@@ -128,8 +128,8 @@ const Products = () => {
 									</button>
 								</div>
 								<div className="relative">
-									<div className="w-full bg-gray-100 dark:bg-gray-800">
-										<div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+									<div className="w-full">
+										<div className="bg-white dark:bg-[#282b42] rounded-lg shadow-sm">
 											<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-6">
 												<div className="flex justify-center">
 													<div className="w-full">
@@ -152,7 +152,7 @@ const Products = () => {
 																<div className="flex text-gray-600">
 																	<label
 																		htmlFor="file-upload"
-																		className="relative cursor-pointer rounded-md bg-white font-bold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-transparent hover:text-blue-500"
+																		className="relative cursor-pointer rounded-md font-bold text-blue-600 dark:text-[#98ca3f] focus-within:outline-none focus-within:ring-2 focus-within:ring-transparent hover:text-blue-500"
 																	>
 																		<span>Carga un archivo</span>
 																		<input
@@ -162,11 +162,11 @@ const Products = () => {
 																			className="sr-only"
 																		/>
 																	</label>
-																	<p className="pl-1">
+																	<p className="pl-1 text-gray-500 dark:text-gray-100">
 																		o arrastralo y sueltalo
 																	</p>
 																</div>
-																<p className="text-sm text-gray-500">
+																<p className="text-sm text-gray-500 dark:text-gray-300">
 																	PNG, JPG, GIF tamaño maximo 10MB
 																</p>
 															</div>
