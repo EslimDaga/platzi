@@ -22,23 +22,18 @@ const Products = () => {
 	const { theme } = useContext(ThemeContext);
 	const [showModalCreateProduct, setShowModalCreateProduct] = useState(false);
 	const [fileName, setFileName] = useState([]);
-	const {
-		acceptedFiles,
-		getRootProps,
-		getInputProps,
-		fileRejections,
-		isDragActive,
-	} = useDropzone({
-		accept: {
-			"image/jpeg": [],
-			"image/png": [],
-		},
-		maxFiles: 3,
-		maxSize: 1000000,
-		onDrop: acceptedFiles => {
-			setFileName(acceptedFiles.map(file => file.path));
-		},
-	});
+	const { acceptedFiles, getRootProps, getInputProps, fileRejections } =
+		useDropzone({
+			accept: {
+				"image/jpeg": [],
+				"image/png": [],
+			},
+			maxFiles: 3,
+			maxSize: 1000000,
+			onDrop: acceptedFiles => {
+				setFileName(acceptedFiles.map(file => file.path));
+			},
+		});
 
 	const [rowData, setRowData] = useState();
 
