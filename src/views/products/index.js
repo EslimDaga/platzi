@@ -5,6 +5,7 @@ import { ThemeContext } from "../../contexts/darkmode/ThemeContext";
 import { FaPen, FaPlusCircle, FaTimes, FaTrash } from "react-icons/fa";
 import { getProducts } from "../../services/products";
 import { AG_GRID_LOCALE_ES } from "../../i18n/locale.es";
+import { useDropzone } from "react-dropzone";
 import Breadcumb from "../../components/app/Breadcumb";
 import Select from "react-select";
 import "ag-grid-community/styles/ag-grid.css";
@@ -20,6 +21,25 @@ const options = [
 const Products = () => {
 	const { theme } = useContext(ThemeContext);
 	const [showModalCreateProduct, setShowModalCreateProduct] = useState(false);
+	const [fileName, setFileName] = useState([]);
+	const {
+		acceptedFiles,
+		getRootProps,
+		getInputProps,
+		fileRejections,
+		isDragActive,
+	} = useDropzone({
+		accept: {
+			"image/jpeg": [],
+			"image/png": [],
+		},
+		maxFiles: 3,
+		maxSize: 1000000,
+		onDrop: acceptedFiles => {
+			setFileName(acceptedFiles.map(file => file.path));
+		},
+	});
+
 	const [rowData, setRowData] = useState();
 
 	const columnDefs = [
@@ -134,10 +154,17 @@ const Products = () => {
 		} else if (values.price <= 0) {
 			errors.price = "El precio debe ser mayor a 0";
 		}
+
+		/* Image dropzone validation */
+		if (fileName.length === 0) {
+			errors.image = "La imagen es requerida";
+		}
+
 		return errors;
 	};
 
 	const handleSubmit = values => {
+		values["image"] = fileName;
 		console.log(values);
 	};
 
@@ -228,64 +255,21 @@ const Products = () => {
 													description: "",
 													category: "",
 													price: "",
+													image: "",
 												}}
 												validate={validateLogin}
 												onSubmit={handleSubmit}
 											>
 												{({
 													values,
-													touched,
 													errors,
 													handleChange,
 													setFieldValue,
-													handleBlur,
 													handleSubmit,
 												}) => (
 													<form onSubmit={handleSubmit}>
-														<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 px-6 pb-6">
-															<div className="flex justify-center">
-																<div className="w-full">
-																	<div className="h-full bg-[#EEEEEE] dark:bg-[#3F425E] flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
-																		<div className="space-y-1 text-center font-urbanist">
-																			<svg
-																				className="mx-auto h-12 w-12 text-gray-400"
-																				stroke="currentColor"
-																				fill="none"
-																				viewBox="0 0 48 48"
-																				aria-hidden="true"
-																			>
-																				<path
-																					d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-																					strokeWidth={2}
-																					strokeLinecap="round"
-																					strokeLinejoin="round"
-																				/>
-																			</svg>
-																			<div className="flex text-gray-600">
-																				<label
-																					htmlFor="file-upload"
-																					className="relative cursor-pointer rounded-md font-bold text-blue-600 dark:text-[#98ca3f] focus-within:outline-none focus-within:ring-2 focus-within:ring-transparent hover:text-blue-500"
-																				>
-																					<span>Carga un archivo</span>
-																					<input
-																						id="file-upload"
-																						name="file-upload"
-																						type="file"
-																						className="sr-only"
-																					/>
-																				</label>
-																				<p className="pl-1 text-gray-500 dark:text-gray-100">
-																					o arrastralo y sueltalo
-																				</p>
-																			</div>
-																			<p className="text-sm text-gray-500 dark:text-gray-300">
-																				PNG, JPG, GIF tamaño maximo 10MB
-																			</p>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<div className="flex justify-center w-full">
+														<div className="gap-6 px-6 pb-6">
+															<div className="justify-center w-full">
 																<div className="w-full">
 																	<div className="space-y-6">
 																		<div>
@@ -415,6 +399,89 @@ const Products = () => {
 																				</label>
 																			)}
 																		</div>
+																		<div
+																			{...getRootProps()}
+																			className={
+																				"bg-[#EEEEEE] dark:bg-[#3F425E] flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 cursor-pointer" +
+																				(errors.image ? " border-red-500" : "")
+																			}
+																		>
+																			<div className="space-y-1 text-center font-urbanist">
+																				<svg
+																					className="mx-auto h-12 w-12 text-gray-400"
+																					stroke="currentColor"
+																					fill="none"
+																					viewBox="0 0 48 48"
+																					aria-hidden="true"
+																				>
+																					<path
+																						d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+																						strokeWidth={2}
+																						strokeLinecap="round"
+																						strokeLinejoin="round"
+																					/>
+																				</svg>
+																				<div className="flex text-gray-600">
+																					<label
+																						htmlFor="image"
+																						className="relative cursor-pointer rounded-md font-bold text-blue-600 dark:text-[#98ca3f] focus-within:outline-none focus-within:ring-2 focus-within:ring-transparent hover:text-blue-500"
+																					>
+																						<span>Carga un archivo</span>
+																						<input
+																							{...getInputProps()}
+																							onChange={handleChange}
+																							id="image"
+																							name="image"
+																							type="file"
+																							value={values.image}
+																						/>
+																					</label>
+																					<p className="pl-1 text-gray-500 dark:text-gray-100">
+																						o arrastralo y sueltalo
+																					</p>
+																				</div>
+																				<p className="text-sm text-gray-500 dark:text-gray-300">
+																					PNG, JPG tamaño maximo 10MB
+																				</p>
+																				<p className="text-sm text-gray-500 dark:text-gray-300">
+																					(Máximo 3 archivos)
+																				</p>
+																			</div>
+																		</div>
+																		{acceptedFiles.length < 1 && (
+																			<div className="text-[#e6215d] text-sm font-urbanist font-semibold">
+																				{errors.image}
+																			</div>
+																		)}
+																		{acceptedFiles.length > 0 &&
+																			acceptedFiles.map(file => (
+																				<li
+																					key={file.path}
+																					className="font-urbanist font-bold text-base text-gray-700 dark:text-gray-100"
+																				>
+																					{file.path} - {file.size} bytes
+																				</li>
+																			))}
+																		{fileRejections.length > 0 &&
+																			fileRejections.map(({ file, errors }) => (
+																				<li
+																					key={file.path}
+																					className="font-urbanist font-bold text-base text-gray-700 dark:text-gray-100"
+																				>
+																					{file.path} - {file.size} bytes
+																					<ul>
+																						{errors.map(e => (
+																							<li
+																								key={e.code}
+																								className="font-urbanist font-bold text-base text-red-500"
+																							>
+																								El tipo de archivo debe ser
+																								imagen/jpeg, imagen/png.
+																							</li>
+																						))}
+																					</ul>
+																				</li>
+																			))}
 																		<div>
 																			<button
 																				className={`bg-[#98ca3f] text-gray-900 active:bg-gray-700 text-base font-urbanist font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 w-full`}
