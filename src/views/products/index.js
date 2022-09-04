@@ -402,7 +402,10 @@ const Products = () => {
 																		<div
 																			{...getRootProps()}
 																			className={
-																				"bg-[#EEEEEE] dark:bg-[#3F425E] flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 cursor-pointer" +
+																				"bg-[#EEEEEE] dark:bg-[#3F425E] flex justify-center items-center rounded-md border-2 border-dashed px-6 pt-5 pb-6 cursor-pointer" +
+																				(acceptedFiles.length > 0
+																					? " border-green-500"
+																					: "") +
 																				(errors.image ? " border-red-500" : "")
 																			}
 																		>
