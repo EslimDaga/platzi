@@ -11,6 +11,7 @@ import Select from "react-select";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import "animate.css";
+import { getCategoriesForSelect } from "../../services/categories";
 
 const options = [
 	{ value: "chocolate", label: "Chocolate" },
@@ -20,8 +21,12 @@ const options = [
 
 const Products = () => {
 	const { theme } = useContext(ThemeContext);
+
 	const [showModalCreateProduct, setShowModalCreateProduct] = useState(false);
 	const [fileName, setFileName] = useState([]);
+	const [categories, setCategories] = useState([]);
+	const [rowData, setRowData] = useState();
+
 	const { acceptedFiles, getRootProps, getInputProps, fileRejections } =
 		useDropzone({
 			accept: {
@@ -34,8 +39,6 @@ const Products = () => {
 				setFileName(acceptedFiles.map(file => file.path));
 			},
 		});
-
-	const [rowData, setRowData] = useState();
 
 	const columnDefs = [
 		{
@@ -108,6 +111,9 @@ const Products = () => {
 
 	useEffect(() => {
 		getProducts().then(data => setRowData(data));
+		getCategoriesForSelect().then(data => {
+			setCategories(data);
+		});
 	}, []);
 
 	const openModalCreateProduct = () => {
@@ -334,7 +340,7 @@ const Products = () => {
 																				Categoría
 																			</label>
 																			<Select
-																				options={options}
+																				options={categories}
 																				name="category"
 																				value={options.find(
 																					option =>
