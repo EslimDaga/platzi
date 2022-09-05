@@ -13,12 +13,6 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import "animate.css";
 import { getCategoriesForSelect } from "../../services/categories";
 
-const options = [
-	{ value: "chocolate", label: "Chocolate" },
-	{ value: "strawberry", label: "Strawberry" },
-	{ value: "vanilla", label: "Vanilla" },
-];
-
 const Products = () => {
 	const { theme } = useContext(ThemeContext);
 
@@ -152,7 +146,7 @@ const Products = () => {
 		/* Price validation */
 		if (!values.price) {
 			errors.price = "El precio es requerido";
-		} else if (values.price <= 0) {
+		} else if (values.price < 0) {
 			errors.price = "El precio debe ser mayor a 0";
 		}
 
@@ -342,7 +336,7 @@ const Products = () => {
 																			<Select
 																				options={categories}
 																				name="category"
-																				value={options.find(
+																				value={categories.find(
 																					option =>
 																						option.value === values.category
 																				)}
