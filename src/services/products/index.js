@@ -6,3 +6,9 @@ export const getProducts = async token => {
 	const data = response.data;
 	return data;
 };
+
+export const getProduct = async id => {
+	const response = await axios.get(`${api}/products/${id}`);
+	const data = response.data;
+	return data;
+};
