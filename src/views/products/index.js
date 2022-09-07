@@ -3,7 +3,11 @@ import { Formik } from "formik";
 import { AgGridReact } from "ag-grid-react";
 import { ThemeContext } from "../../contexts/darkmode/ThemeContext";
 import { FaPen, FaPlusCircle, FaTimes, FaTrash } from "react-icons/fa";
-import { getProduct, getProducts } from "../../services/products";
+import {
+	createProduct,
+	getProduct,
+	getProducts,
+} from "../../services/products";
 import { AG_GRID_LOCALE_ES } from "../../i18n/locale.es";
 import { useDropzone } from "react-dropzone";
 import Breadcumb from "../../components/app/Breadcumb";
@@ -82,7 +86,7 @@ const Products = () => {
 							onClick={() => {
 								openModalEditProduct(params.value);
 							}}
-							className="flex items-center text-white font-bold bg-blue-900 rounded-md px-3 mr-2"
+							className="flex items-center text-white font-bold bg-blue-900 opacity-70 rounded-md px-3 mr-2"
 						>
 							<FaPen className="mr-2" />
 							Editar
@@ -91,7 +95,7 @@ const Products = () => {
 							onClick={() => {
 								handleDelete(params.value);
 							}}
-							className="flex items-center text-white font-bold bg-red-500 rounded-md px-3"
+							className="flex items-center text-white font-bold bg-red-500 opacity-70 rounded-md px-3"
 						>
 							<FaTrash className="mr-2" />
 							Eliminar
@@ -128,9 +132,7 @@ const Products = () => {
 	};
 
 	const openModalEditProduct = id => {
-		console.log(id);
 		getProduct(id).then(data => {
-			console.log(data);
 			setProduct(data);
 		});
 		setShowModalEditProduct(true);
@@ -196,20 +198,12 @@ const Products = () => {
 	const handleSubmit = values => {
 		values["image"] = fileName;
 		const { name, description, price, category, image } = values;
-		axios
-			.post("https://api.escuelajs.co/api/v1/products/", {
-				title: name,
-				price,
-				description,
-				categoryId: category,
-				images: image,
-			})
-			.then(res => {
-				if (res.status === 201) {
-					setShowModalCreateProduct(false);
-					setRowData([...rowData, res.data]);
-				}
-			});
+		createProduct(name, description, price, category, image).then(data => {
+			if (data.status === 201) {
+				setShowModalCreateProduct(false);
+				setRowData([...rowData, data.data]);
+			}
+		});
 	};
 
 	const handleDelete = id => {
