@@ -12,3 +12,21 @@ export const getProduct = async id => {
 	const data = response.data;
 	return data;
 };
+
+export const createProduct = async (
+	name,
+	description,
+	price,
+	category,
+	image
+) => {
+	const response = await axios.post(`${api}/products`, {
+		title: name,
+		price,
+		description,
+		categoryId: category,
+		images: image,
+	});
+	const data = response;
+	return data;
+};
