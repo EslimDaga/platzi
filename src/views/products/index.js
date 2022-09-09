@@ -17,6 +17,7 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import "animate.css";
 import { getCategoriesForSelect } from "../../services/categories";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Products = () => {
 	const { theme } = useContext(ThemeContext);
@@ -207,9 +208,37 @@ const Products = () => {
 	};
 
 	const handleDelete = id => {
-		axios.delete(`https://api.escuelajs.co/api/v1/products/${id}`).then(res => {
-			if (res.status === 200) {
-				setRowData(rowData.filter(item => item.id !== id));
+		Swal.fire({
+			title: "¿Estás seguro?",
+			text: "No podrás revertir esta acción",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#1E3A8A",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Sí, eliminar",
+			cancelButtonText: "Cancelar",
+			customClass: {
+				title:
+					theme === "dark"
+						? "text-white font-urbanist font-bold"
+						: "text-gray-900 font-urbanist font-bold",
+				htmlContainer:
+					theme === "dark"
+						? "text-white font-urbanist"
+						: "text-gray-900 font-urbanist",
+				confirmButton:
+					"bg-red-500 hover:bg-red-600 text-white font-urbanist font-bold focus:outline-none focus:ring-none",
+			},
+			background: theme === "dark" ? "#1F2937" : "#fff",
+		}).then(result => {
+			if (result.isConfirmed) {
+				axios
+					.delete(`https://api.escuelajs.co/api/v1/products/${id}`)
+					.then(res => {
+						if (res.status === 200) {
+							setRowData(rowData.filter(item => item.id !== id));
+						}
+					});
 			}
 		});
 	};
