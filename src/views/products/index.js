@@ -87,7 +87,7 @@ const Products = () => {
 							onClick={() => {
 								openModalEditProduct(params.value);
 							}}
-							className="flex items-center text-white font-bold bg-blue-900 opacity-70 rounded-md px-3 mr-2"
+							className="flex items-center text-white font-bold bg-blue-900 rounded-md px-3 mr-2"
 						>
 							<FaPen className="mr-2" />
 							Editar
@@ -96,7 +96,7 @@ const Products = () => {
 							onClick={() => {
 								handleDelete(params.value);
 							}}
-							className="flex items-center text-white font-bold bg-red-500 opacity-70 rounded-md px-3"
+							className="flex items-center text-white font-bold bg-red-500 rounded-md px-3"
 						>
 							<FaTrash className="mr-2" />
 							Eliminar
