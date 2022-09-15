@@ -18,13 +18,14 @@ import "animate.css";
 import { getCategoriesForSelect } from "../../services/categories";
 import axios from "axios";
 import Swal from "sweetalert2";
+import toast, { Toaster } from "react-hot-toast";
 
 const Products = () => {
 	const { theme } = useContext(ThemeContext);
 
 	const [showModalCreateProduct, setShowModalCreateProduct] = useState(false);
 	const [showModalEditProduct, setShowModalEditProduct] = useState(false);
-	const [fileName, setFileName] = useState([]);
+	const [fileName, setFileName] = useState("");
 	const [rowData, setRowData] = useState();
 	const [categories, setCategories] = useState([]);
 	const [product, setProduct] = useState({});
@@ -34,9 +35,9 @@ const Products = () => {
 			accept: {
 				"image/jpeg": [],
 				"image/png": [],
+				"image/jpg": [],
 			},
 			maxFiles: 3,
-			maxSize: 1000000,
 			onDrop: acceptedFiles => {
 				setFileName(acceptedFiles.map(file => file.path));
 			},
@@ -203,6 +204,7 @@ const Products = () => {
 			if (data.status === 201) {
 				setShowModalCreateProduct(false);
 				setRowData([...rowData, data.data]);
+				toast.success("Producto creado correctamente");
 			}
 		});
 	};
@@ -341,6 +343,7 @@ const Products = () => {
 													handleChange,
 													setFieldValue,
 													handleSubmit,
+													resetForm,
 												}) => (
 													<form onSubmit={handleSubmit}>
 														<div className="gap-6 px-6 pb-6">
@@ -507,11 +510,9 @@ const Products = () => {
 																						<span>Carga un archivo</span>
 																						<input
 																							{...getInputProps()}
-																							onChange={handleChange}
 																							id="image"
 																							name="image"
 																							type="file"
-																							value={values.image}
 																						/>
 																					</label>
 																					<p className="pl-1 text-gray-500 dark:text-gray-100">
@@ -913,6 +914,33 @@ const Products = () => {
 					</div>
 				</div>
 			</div>
+			<Toaster
+				toastOptions={{
+					className: "font-urbanist font-bold",
+					error: {
+						icon: "😕",
+						iconTheme: {
+							primary: "white",
+							secondary: "#E6215D",
+						},
+						style: {
+							background: "#E6215D",
+							color: "#FFFFFF",
+						},
+					},
+					success: {
+						icon: "🎉",
+						iconTheme: {
+							primary: "white",
+							secondary: "#00ab55",
+						},
+						style: {
+							background: "#00ab55",
+							color: "#FFFFFF",
+						},
+					},
+				}}
+			/>
 		</>
 	);
 };
