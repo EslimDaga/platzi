@@ -78,6 +78,8 @@ const Products = () => {
 		{
 			headerName: "Acciones",
 			field: "id",
+			filter: false,
+			sortable: false,
 			cellClass: "text-center",
 			minWidth: 200,
 			resizable: false,
