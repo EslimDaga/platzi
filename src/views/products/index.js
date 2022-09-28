@@ -236,6 +236,8 @@ const Products = () => {
 						: "text-gray-900 font-urbanist",
 				confirmButton:
 					"bg-red-500 hover:bg-red-600 text-white font-urbanist font-bold focus:outline-none focus:ring-none",
+				cancelButton:
+					"bg-gray-500 hover:bg-gray-600 text-white font-urbanist font-bold focus:outline-none focus:ring-none",
 			},
 			background: theme === "dark" ? "#1F2937" : "#fff",
 		}).then(result => {
@@ -245,6 +247,7 @@ const Products = () => {
 					.then(res => {
 						if (res.status === 200) {
 							setRowData(rowData.filter(item => item.id !== id));
+							toast.success("Producto eliminado correctamente");
 						}
 					});
 			}
