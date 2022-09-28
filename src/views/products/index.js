@@ -149,6 +149,9 @@ const Products = () => {
 			.classList.add("animate__fadeOutUp");
 
 		setTimeout(() => {
+			//Reset Accepted Files
+			setFileName("");
+			acceptedFiles.splice(0, acceptedFiles.length);
 			setShowModalCreateProduct(false);
 		}, 150);
 	};
@@ -200,10 +203,13 @@ const Products = () => {
 	const handleSubmit = values => {
 		values["image"] = fileName;
 		const { name, description, price, category, image } = values;
+		console.log(values);
 		createProduct(name, description, price, category, image).then(data => {
 			if (data.status === 201) {
-				setShowModalCreateProduct(false);
 				setRowData([...rowData, data.data]);
+				setFileName("");
+				acceptedFiles.splice(0, acceptedFiles.length);
+				setShowModalCreateProduct(false);
 				toast.success("Producto creado correctamente");
 			}
 		});
