@@ -135,8 +135,8 @@ const Products = () => {
 		setShowModalCreateProduct(true);
 	};
 
-	const openModalEditProduct = id => {
-		getProduct(id).then(data => {
+	const openModalEditProduct = async id => {
+		await getProduct(id).then(data => {
 			setProduct(data);
 		});
 		setShowModalEditProduct(true);
@@ -658,7 +658,7 @@ const Products = () => {
 																				name="name"
 																				id="name"
 																				onChange={handleChange}
-																				value={values.name}
+																				value={product.title}
 																				className={
 																					"border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full" +
 																					(errors.name
@@ -685,8 +685,8 @@ const Products = () => {
 																			<textarea
 																				name="description"
 																				id="description"
-																				onChange={handleChange}
-																				value={values.description}
+																				onChange={setFieldValue}
+																				value={product.description}
 																				cols="30"
 																				rows="3"
 																				className={
@@ -759,7 +759,7 @@ const Products = () => {
 																				name="price"
 																				id="price"
 																				onChange={handleChange}
-																				value={values.price}
+																				value={product.price}
 																				className={
 																					"border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full" +
 																					(errors.price
