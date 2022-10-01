@@ -625,14 +625,16 @@ const Products = () => {
 										<div className="bg-white dark:bg-[#282b42] rounded-lg shadow-sm">
 											<Formik
 												initialValues={{
-													name: "",
-													description: "",
-													category: "",
-													price: "",
+													name: product.title,
+													description: product.description,
+													category: product.category,
+													price: product.price,
 													image: "",
 												}}
 												validate={validateLogin}
-												onSubmit={handleSubmit}
+												onSubmit={async values => {
+													console.log(values);
+												}}
 											>
 												{({
 													values,
@@ -658,7 +660,7 @@ const Products = () => {
 																				name="name"
 																				id="name"
 																				onChange={handleChange}
-																				value={product.title}
+																				value={values.name}
 																				className={
 																					"border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full" +
 																					(errors.name
@@ -685,8 +687,8 @@ const Products = () => {
 																			<textarea
 																				name="description"
 																				id="description"
-																				onChange={setFieldValue}
-																				value={product.description}
+																				onChange={handleChange}
+																				value={values.description}
 																				cols="30"
 																				rows="3"
 																				className={
@@ -713,6 +715,12 @@ const Products = () => {
 																				Categoría
 																			</label>
 																			<Select
+																				defaultValue={() => {
+																					return {
+																						label: values.category.name,
+																						value: values.category.id,
+																					};
+																				}}
 																				options={categories}
 																				name="category"
 																				value={categories.find(
@@ -759,7 +767,7 @@ const Products = () => {
 																				name="price"
 																				id="price"
 																				onChange={handleChange}
-																				value={product.price}
+																				value={values.price}
 																				className={
 																					"border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-[#EEEEEE] dark:bg-[#3F425E] rounded-md font-urbanist text-base font-medium shadow focus:outline-gray-700 w-full" +
 																					(errors.price
