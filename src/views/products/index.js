@@ -261,12 +261,16 @@ const Products = () => {
 			...provided,
 			background: "#eeeeee",
 			borderRadius: "0.5rem",
-			borderColor: state.isFocused ? "#eeeeee" : "#eeeeee",
+			border: state.isFocused ? "1px solid #374151" : "1px solid #eeeeee",
+			boxShadow: state.isFocused ? "0 0 0 1px #374151" : "none",
 			minHeight: state.isSelected ? "56px" : "56px",
+			"&:hover": {
+				border: state.isFocused ? "1px solid #374151" : "1px solid #eeeeee",
+			},
 		}),
 		option: (provided, state) => ({
 			...provided,
-			background: state.isFocused ? "#2563eb" : "#eeeeee",
+			background: state.isFocused ? "#2563eb" : "#fff",
 			color: state.isFocused ? "#fff" : "#333333",
 			cursor: "pointer",
 			"&:hover": {
@@ -277,6 +281,15 @@ const Products = () => {
 		placeholder: base => ({
 			...base,
 		}),
+		menu: base => ({
+			...base,
+			borderRadius: "0.5rem",
+		}),
+		menuList: base => ({
+			...base,
+			padding: "0",
+			borderRadius: "0.5rem",
+		}),
 	};
 
 	const customStylesDarkMode = {
@@ -284,9 +297,13 @@ const Products = () => {
 			...provided,
 			background: "#3F425E",
 			borderRadius: "0.5rem",
-			borderColor: "#3F425E",
 			color: state.isSelected ? "#fff" : "#fff",
+			border: state.isFocused ? "1px solid #fff" : "1px solid #3F425E",
+			boxShadow: state.isFocused ? "0 0 0 0 #fff" : "none",
 			minHeight: state.isSelected ? "56px" : "56px",
+			"&:hover": {
+				border: state.isFocused ? "1px solid #fff" : "1px solid #3F425E",
+			},
 		}),
 		singleValue: (provided, state) => ({
 			...provided,
@@ -299,6 +316,12 @@ const Products = () => {
 		menuList: (provided, state) => ({
 			...provided,
 			background: "#3F425E",
+			padding: "0",
+			borderRadius: "0.5rem",
+		}),
+		menu: base => ({
+			...base,
+			borderRadius: "0.6rem",
 		}),
 		option: (provided, state) => ({
 			...provided,
@@ -306,6 +329,13 @@ const Products = () => {
 			color: state.isFocused ? "#fff" : "#fff",
 			"&:hover": {
 				backgroundColor: "#5c608a",
+				color: "#fff",
+			},
+		}),
+		dropdownIndicator: base => ({
+			...base,
+			color: "#fff",
+			"&:hover": {
 				color: "#fff",
 			},
 		}),
